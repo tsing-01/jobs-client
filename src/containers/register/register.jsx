@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React, { Component } from 'react'
 
 import {
     NavBar,
@@ -9,63 +9,60 @@ import {
     Radio,
     Button
 } from 'antd-mobile'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 
 
-import {register} from '../../redux/actions'
+import { register } from '../../redux/actions'
 import Logo from '../../components/logo/logo'
 
-const ListItem=List.Item
+const ListItem = List.Item
 
 class Register extends Component {
-    state={
-        username:'',
-        password:'',
-        password2:'',
-        type:'employer',// employer or applicant
+    state = {
+        username: '',
+        password: '',
+        password2: '',
+        type: 'employer',// employer or applicant
     }
-    register=()=>{
-        console.log(this.state);
-        console.log(this.props);
-        console.log(this.props.user);
+    register = () => {
         this.props.register(this.state);
-        
+
     }
-    handleChange=(name,val)=>{
+    handleChange = (name, val) => {
         this.setState({
-            [name]:val 
+            [name]: val
         })
     }
-    toLogin=()=>{
-        this.props.history.replace('/login') 
-        
+    toLogin = () => {
+        this.props.history.replace('/login')
+
     }
 
-    render () {
-        const {type}=this.state
-        const {msg,redirectTo}=this.props.user
+    render() {
+        const { type } = this.state
+        const { msg, redirectTo } = this.props.user
 
-        if(redirectTo){
+        if (redirectTo) {
             return <Redirect to={redirectTo} />
         }
 
 
-        return(
+        return (
             <div>
                 <NavBar>Silicon Valley Direct Recruitment</NavBar>
-                <Logo/>
+                <Logo />
                 <WingBlank>
                     <List>
                         {msg ? <div className='error-msg'>{msg}</div> : null} {/* Display error message here */}
-                        <WhiteSpace/>
+                        <WhiteSpace />
                         {/* Top and bottom margin */}
-                        <InputItem placeholder='Enter your username' onChange={val => {this.handleChange('username', val)}}>Username:</InputItem>
-                        <WhiteSpace/>
-                        <InputItem placeholder='Enter your password' type="password" onChange={val => {this.handleChange('password', val)}}>Password:</InputItem>
-                        <WhiteSpace/>
-                        <InputItem placeholder='Confirm your password' type="password" onChange={val => {this.handleChange('password2', val)}}>Confirm Password:</InputItem>
+                        <InputItem placeholder='Enter your username' onChange={val => { this.handleChange('username', val) }}>Username:</InputItem>
+                        <WhiteSpace />
+                        <InputItem placeholder='Enter your password' type="password" onChange={val => { this.handleChange('password', val) }}>Password:</InputItem>
+                        <WhiteSpace />
+                        <InputItem placeholder='Confirm your password' type="password" onChange={val => { this.handleChange('password2', val) }}>Confirm Password:</InputItem>
                         <ListItem>
                             <span>User Type</span>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -73,9 +70,9 @@ class Register extends Component {
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <Radio checked={type === 'employer'} onChange={() => this.handleChange('type', 'employer')}>Employer</Radio>
                         </ListItem>
-                        <WhiteSpace/>
+                        <WhiteSpace />
                         <Button type="primary" onClick={this.register}>Register</Button>
-                        <WhiteSpace/>
+                        <WhiteSpace />
                         <Button onClick={this.toLogin}>Already have an account</Button>
                     </List>
                 </WingBlank>
@@ -86,6 +83,6 @@ class Register extends Component {
 }
 
 export default connect(
-    state=>({user:state.user}),
-    {register}
+    state => ({ user: state.user }),
+    { register }
 )(Register)

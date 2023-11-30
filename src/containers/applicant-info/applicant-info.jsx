@@ -1,55 +1,54 @@
 // Applicant main page
-import React,{Component} from 'react'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
-import {NavBar,InputItem,Button,TextareaItem} from 'antd-mobile'
+import { NavBar, InputItem, Button, TextareaItem } from 'antd-mobile'
 import HeaderSelector from '../../components/header-selector/header-selector'
 
-import {updateUser} from '../../redux/actions'
+import { updateUser } from '../../redux/actions'
 
-class ApplicantInfo extends Component{
-    state={
-        header:'',
-        post:'',
-        info:'',
-        
+class ApplicantInfo extends Component {
+    state = {
+        header: '',
+        post: '',
+        info: '',
+
     }
     // update header state
-    setHeader=(header)=>{
+    setHeader = (header) => {
         this.setState({
             header
         })
     }
 
 
-    handleChange=(name,value)=>{
+    handleChange = (name, value) => {
         this.setState({
-            [name]:value
+            [name]: value
         })
     }
-    save=()=>{
-        console.log(this.state)
+    save = () => {
         this.props.updateUser(this.state)
     }
 
 
 
-    render(){
+    render() {
         // redirect to Applicant or employer main page
-        const {header,type}=this.props.user
-        if(header){// means user info is completed
-            const path=type==='applicant'?'/applicant':'/employer'
+        const { header, type } = this.props.user
+        if (header) {// means user info is completed
+            const path = type === 'applicant' ? '/applicant' : '/employer'
             return <Redirect to={path} />
         }
 
 
-        return(
+        return (
             <div>
                 <NavBar>Profile Information Update</NavBar>
-                <HeaderSelector setHeader={this.setHeader}/>
-                <InputItem placeholder="Enter desired job position" onChange={val => {this.handleChange('post', val)}}>Job Position:</InputItem>
-                <TextareaItem title="Introduction:" rows={3} onChange={val => {this.handleChange('info', val)}} />
+                <HeaderSelector setHeader={this.setHeader} />
+                <InputItem placeholder="Enter desired job position" onChange={val => { this.handleChange('post', val) }}>Job Position:</InputItem>
+                <TextareaItem title="Introduction:" rows={3} onChange={val => { this.handleChange('info', val) }} />
 
                 <Button type="primary" onClick={this.save}>Save</Button>
 
@@ -59,6 +58,6 @@ class ApplicantInfo extends Component{
 }
 
 export default connect(
-    state=>({user:state.user}),
-    {updateUser}
+    state => ({ user: state.user }),
+    { updateUser }
 )(ApplicantInfo)

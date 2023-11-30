@@ -11,5 +11,5 @@
 * socket communication in localhost:4000
 
 ## repositories
-* server: 
-* client: 
+* server: https://github.com/tsing-01/jobs-server
+* client: https://github.com/tsing-01/jobs-client

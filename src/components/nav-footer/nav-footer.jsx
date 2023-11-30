@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
-import {TabBar} from 'antd-mobile'
+import React, { Component } from 'react'
+import { TabBar } from 'antd-mobile'
 import PropTypes from 'prop-types'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 const Item = TabBar.Item
 
@@ -12,9 +12,9 @@ class NavFooter extends Component {
         unReadCount: PropTypes.number.isRequired
     }
     render() {
-        let {navList, unReadCount} = this.props
+        let { navList, unReadCount } = this.props
         // filter  the nav with hide=true (boss and genius can only show one)
-        navList=navList.filter(nav => !nav.hide)
+        navList = navList.filter(nav => !nav.hide)
         const path = this.props.location.pathname   // only the path changed, the component will be re-rendered
         return (
             <TabBar>
@@ -22,12 +22,12 @@ class NavFooter extends Component {
                     navList.map((nav) => (
                         <Item
                             key={nav.path}
-                            badge={nav.path==='/message'?unReadCount:0}
+                            badge={nav.path === '/message' ? unReadCount : 0}
                             title={nav.text}
-                            icon={{uri: require(`./images/${nav.icon}.png`)}}
-                            selectedIcon={{uri: require(`./images/${nav.icon}-selected.png`)}}
-                            selected={path===nav.path}
-                            onPress={()=> this.props.history.replace(nav.path)}
+                            icon={{ uri: require(`./images/${nav.icon}.png`) }}
+                            selectedIcon={{ uri: require(`./images/${nav.icon}-selected.png`) }}
+                            selected={path === nav.path}
+                            onPress={() => this.props.history.replace(nav.path)}
                         />
                     ))
                 }
