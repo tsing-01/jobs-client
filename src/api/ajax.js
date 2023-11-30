@@ -1,21 +1,20 @@
 // default: ajax request module
 
 import axios from 'axios'
-export default function ajax(url,data={},type="GET"){
-    if(type.toUpperCase()==="GET"){
+export default function ajax(url, data = {}, type = "GET") {
+    if (type.toUpperCase() === "GET") {
         // join strings
-        let paramStr="";
-        Object.keys(data).forEach(key=>{
-            paramStr+=key+'='+data[key]+'&';
+        let paramStr = "";
+        Object.keys(data).forEach(key => {
+            paramStr += key + '=' + data[key] + '&';
         })
-        if(paramStr){
-            paramStr=paramStr.substring(0,paramStr.length-1);
+        if (paramStr) {
+            paramStr = paramStr.substring(0, paramStr.length - 1);
         }
         // axisos get request
-        return axios.get(url+'?'+paramStr)
-    }
-    else{
+        return axios.get(url + '?' + paramStr)
+    } else {
         // axisos post request
-        return axios.post(url,data);
+        return axios.post(url, data);
     }
 }
