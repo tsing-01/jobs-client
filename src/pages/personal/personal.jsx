@@ -29,12 +29,20 @@ class Personal extends Component {
         ])
     }
 
+    // update personal information
+    updateInfo = () => {
+        const { type } = this.props.user;
+        if(type)  {
+            this.props.history.replace(`/${type}info`)
+        }
+    }
+
     render() {
         const { username, info, header, company, post, salary } = this.props.user
         return (
-            <div style={{ marginBottom: 50, marginTop: 50 }}>
+            <div style={{ marginBottom: 50, marginTop: 50, padding: '0 10px' }}>
                 <Result
-                    img={<img src={require(`../../assets/images/${header}.png`)} style={{ width: 50 }} alt="header" />}
+                    img={<img src={header && require(`../../assets/images/${header}.png`)} style={{ width: 50 }} alt="header" />}
                     title={username}
                     message={company}
                 />
@@ -47,10 +55,9 @@ class Personal extends Component {
                 </List>
                 <WhiteSpace />
                 <List>
-                    <Button type='warning' onClick={this.logout} >Log out</Button>
+                    <Button type='primary' onClick={this.updateInfo} >Update Info</Button>
+                    <Button type='warning' onClick={this.logout} style={{marginTop: '10px'}}>Log out</Button>
                 </List>
-
-
             </div>
         )
     }

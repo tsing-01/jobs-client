@@ -1,7 +1,6 @@
 // Applicant main page
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 
 import { NavBar, InputItem, Button, TextareaItem } from 'antd-mobile'
 import HeaderSelector from '../../components/header-selector/header-selector'
@@ -30,28 +29,30 @@ class ApplicantInfo extends Component {
     }
     save = () => {
         this.props.updateUser(this.state)
+        // jump to main page
+        this.props.history.push('/' + this.props.user.type)
     }
 
+    initData = (user) => {
+        this.setState({
+            header: user.header,
+            post: user.post,
+            info: user.info
+        })
+    }
 
+    componentWillMount() {
+        this.initData(this.props.user)
+    }
 
     render() {
-        // redirect to Applicant or employer main page
-        const { header, type } = this.props.user
-        if (header) {// means user info is completed
-            const path = type === 'applicant' ? '/applicant' : '/employer'
-            return <Redirect to={path} />
-        }
-
-
         return (
             <div>
                 <NavBar>Profile Information Update</NavBar>
-                <HeaderSelector setHeader={this.setHeader} />
-                <InputItem placeholder="Enter desired job position" onChange={val => { this.handleChange('post', val) }}>Job Position:</InputItem>
-                <TextareaItem title="Introduction:" rows={3} onChange={val => { this.handleChange('info', val) }} />
-
+                <HeaderSelector icon={require(`../../assets/images/${this.state.header}.png`)} setHeader={this.setHeader} />
+                <InputItem value={this.state.post} placeholder="Enter desired job position" onChange={val => { this.handleChange('post', val) }}>J Position:</InputItem>
+                <TextareaItem value={this.state.info} title="Intro:" rows={3} onChange={val => { this.handleChange('info', val) }} />
                 <Button type="primary" onClick={this.save}>Save</Button>
-
             </div>
         )
     }

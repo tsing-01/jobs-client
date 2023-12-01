@@ -13,6 +13,7 @@ class UserList extends Component {
     }
     render() {
         const { userList } = this.props
+        console.log(userList)
         return (
             <WingBlank style={{ marginBottom: 50, marginTop: 50 }}>
                 <QueueAnim type='scale'>
@@ -22,7 +23,7 @@ class UserList extends Component {
                                 <WhiteSpace />
                                 <Card onClick={() => this.props.history.push(`/chat/${user._id}`)}>
                                     <Header
-                                        thumb={require(`../../assets/images/${user.header}.png`)}
+                                        thumb={user.header && require(`../../assets/images/${user.header}.png`)}
                                         extra={user.username}
                                     />
                                     <Body>

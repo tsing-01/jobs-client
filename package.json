@@ -6,6 +6,7 @@
   },
   "description": "jobs application server",
   "email": "yshaots@bu.edu",
+  "homepage": "",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

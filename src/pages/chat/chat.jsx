@@ -100,7 +100,7 @@ class Chat extends Component {
                                 }
                                 else { // send by me
                                     return (
-                                        <Item key={msg._id} className='chat-me' extra='我'>
+                                        <Item key={msg._id} className='chat-me' extra='me'>
                                             {msg.content}
                                         </Item>
                                     )
@@ -117,7 +117,7 @@ class Chat extends Component {
                         onChange={val => this.setState({ content: val })}
                         onFocus={() => this.setState({ isShow: false })}
                         extra={
-                            <span>
+                            <span style={{display: 'flex', alignItems: 'center'}}>
                                 <span onClick={this.toggleShow} style={{ marginRight: 5 }}><span role='img' aria-label="emoj">😃</span></span>
                                 <span onClick={this.handleSend}>Send</span>
                             </span>

@@ -1,6 +1,6 @@
 // 404 
 import React from 'react'
-import { Button } from 'antd-mobile'
+import Button from 'antd-mobile/lib/button';
 
 class NotFound extends React.Component {
     render() {

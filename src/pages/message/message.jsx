@@ -56,7 +56,7 @@ class Message extends Component {
         const lastMsgs = getLastMsgs(chatMsgs, user._id)
 
         return (
-            <List style={{ marginTop: 50, marginBottom: 50 }}>
+            <List style={{ marginTop: 50, marginBottom: 50, padding: '0 10px' }}>
                 {
                     lastMsgs.map(msg => {
                         // get target id

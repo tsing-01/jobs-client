@@ -14,7 +14,7 @@ class NavFooter extends Component {
     render() {
         let { navList, unReadCount } = this.props
         // filter  the nav with hide=true (boss and genius can only show one)
-        navList = navList.filter(nav => !nav.hide)
+        // navList = navList.filter(nav => !nav.hide)
         const path = this.props.location.pathname   // only the path changed, the component will be re-rendered
         return (
             <TabBar>

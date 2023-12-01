@@ -2,9 +2,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {HashRouter,Route,Switch} from 'react-router-dom'//引入路由
-import Register from './containers/register/register'
-import Login from './containers/login/login'
-import Main from './containers/main/main'
+import Register from './pages/register/register'
+import Login from './pages/login/login'
+import Main from './pages/main/main'
 
 // import redux
 import {Provider} from 'react-redux'

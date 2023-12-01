@@ -10,7 +10,7 @@ export default class HeaderSelector extends Component {
     }
 
     state = {
-        icon: null // picture object
+        icon: this.props.icon
     }
 
     constructor(props) {
@@ -36,6 +36,7 @@ export default class HeaderSelector extends Component {
     render() {
         // header icon
         const { icon } = this.state
+        console.log('state', this.state)
         const listHeader = !icon ? "selct avatar" : (
             <div>selected avatar: <img alt='icon' src={icon} /></div>
         )
