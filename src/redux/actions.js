@@ -22,12 +22,14 @@ import {
 
 // Import the client-side IO
 import io from 'socket.io-client';
+import { config } from '../config';
+const SOCKET_URL = config[process.env.NODE_ENV].SOCKET_URL;
 
 function initIO(dispatch, userid) {
   // Before creating the object: Check if the object already exists, only create it if it doesn't (singleton)
   if (!io.socket) {
     // Connect to the server and get the connection object
-    io.socket = io('ws://localhost:4000'); // After creating the object, save the object
+    io.socket = io(SOCKET_URL); // After creating the object, save the object
     // Bind a listener to receive messages sent by the server
     io.socket.on('receiveMsg', function (chatMsg) {
       console.log('Client receives a message sent by the server', chatMsg);
@@ -181,6 +183,7 @@ export const register = (user) => {
       // After successful registration, get user chat data
       getMsgList(dispatch, result.data._id);
       // Dispatch a successful synchronous action, i.e., the authSuccess synchronous action
+      
       dispatch(authSuccess(result.data));
     } else {
       // Registration failed
@@ -207,6 +210,8 @@ export const login = (user) => {
     const response = await reqLogin(user);
     const result = response.data;
     if (result.code === 0) {
+
+      console.log('Login successful', result.data);
       // Login successful
       // After successful login, get user chat data
       getMsgList(dispatch, result.data._id);
@@ -222,6 +227,7 @@ export const login = (user) => {
 
 // Asynchronous action for updating user information
 export const updateUser = (user) => {
+  console.log('updateUser', user);
   return async (dispatch) => {
     const response = await reqUpdateUser(user);
     const result = response.data;

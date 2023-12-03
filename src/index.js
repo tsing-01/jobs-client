@@ -12,7 +12,6 @@ import store from './redux/store'
 
 // import overall css
 import './assets/css/index.less'
-
 // import './test/socketio_test'
 
 ReactDOM.render((

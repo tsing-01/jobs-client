@@ -10,7 +10,7 @@ import { updateUser } from '../../redux/actions'
 class ApplicantInfo extends Component {
     state = {
         header: '',
-        post: '',
+        position: '',
         info: '',
 
     }
@@ -36,7 +36,7 @@ class ApplicantInfo extends Component {
     initData = (user) => {
         this.setState({
             header: user.header,
-            post: user.post,
+            position: user.position,
             info: user.info
         })
     }
@@ -49,8 +49,8 @@ class ApplicantInfo extends Component {
         return (
             <div>
                 <NavBar>Profile Information Update</NavBar>
-                <HeaderSelector icon={require(`../../assets/images/${this.state.header}.png`)} setHeader={this.setHeader} />
-                <InputItem value={this.state.post} placeholder="Enter desired job position" onChange={val => { this.handleChange('post', val) }}>J Position:</InputItem>
+                <HeaderSelector icon={this.state.header && require(`../../assets/images/${this.state.header}.png`)} setHeader={this.setHeader} />
+                <InputItem value={this.state.position} placeholder="Enter desired job position" onChange={val => { this.handleChange('position', val) }}>J Position:</InputItem>
                 <TextareaItem value={this.state.info} title="Intro:" rows={3} onChange={val => { this.handleChange('info', val) }} />
                 <Button type="primary" onClick={this.save}>Save</Button>
             </div>

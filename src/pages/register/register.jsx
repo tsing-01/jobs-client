@@ -53,22 +53,20 @@ class Register extends Component {
             <div>
                 <NavBar>Silicon Valley Direct Recruitment</NavBar>
                 <Logo />
-                <WingBlank>
+                <WingBlank style={{marginTop: '-20px'}}>
                     <List>
-                        {msg ? <div className='error-msg'>{msg}</div> : null} {/* Display error message here */}
+                        {msg ? <div className='error-msg' style={{paddingTop: '10px'}}>{msg}</div> : null} {/* Display error message here */}
                         <WhiteSpace />
                         {/* Top and bottom margin */}
                         <InputItem placeholder='Enter your username' onChange={val => { this.handleChange('username', val) }}>Username:</InputItem>
                         <WhiteSpace />
                         <InputItem placeholder='Enter your password' type="password" onChange={val => { this.handleChange('password', val) }}>Password:</InputItem>
                         <WhiteSpace />
-                        <InputItem placeholder='Confirm your password' type="password" onChange={val => { this.handleChange('password2', val) }}>Confirm Password:</InputItem>
+                        <InputItem placeholder='Confirm your password' type="password" onChange={val => { this.handleChange('password2', val) }}>Check Pwd:</InputItem>
                         <ListItem>
-                            <span>User Type</span>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Radio checked={type === 'applicant'} onChange={() => this.handleChange('type', 'applicant')}>Applicant</Radio>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Radio checked={type === 'employer'} onChange={() => this.handleChange('type', 'employer')}>Employer</Radio>
+                            <span>User Type:</span>
+                            <Radio style={{marginLeft: '20px'}} checked={type === 'applicant'} onChange={() => this.handleChange('type', 'applicant')}>Applicant</Radio>
+                            <Radio style={{marginLeft: '30px'}} checked={type === 'employer'} onChange={() => this.handleChange('type', 'employer')}>Employer</Radio>
                         </ListItem>
                         <WhiteSpace />
                         <Button type="primary" onClick={this.register}>Register</Button>

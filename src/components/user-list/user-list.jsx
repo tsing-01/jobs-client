@@ -27,7 +27,7 @@ class UserList extends Component {
                                         extra={user.username}
                                     />
                                     <Body>
-                                        <div>Position: {user.post}</div>
+                                        <div>Position: {user.position}</div>
                                         {user.company ? <div>Company: {user.company}</div> : null}
                                         {user.salary ? <div>Monthly salary: {user.salary}</div> : null}
                                         <div>Descripton: {user.info}</div>

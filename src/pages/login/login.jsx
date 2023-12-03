@@ -56,9 +56,9 @@ class Login extends Component {
             <div>
                 <NavBar>Silicon Valley Direct Recruitment</NavBar>
                 <Logo />
-                <WingBlank>
+                <WingBlank style={{marginTop: '-20px'}}>
                     <List>
-                        {msg ? <div className="error-msg">{msg}</div> : null}
+                        {msg ? <div className="error-msg" style={{paddingTop: '10px'}}>{msg}</div> : null}
                         <WhiteSpace />
                         {/* Top and bottom margin */}
                         <InputItem placeholder='Enter your username' onChange={val => { this.handleChange('username', val) }}>Username:</InputItem>

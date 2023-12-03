@@ -13,3 +13,6 @@
 ## repositories
 * server: https://github.com/tsing-01/jobs-server
 * client: https://github.com/tsing-01/jobs-client
+
+## env
+/src/config/index.js file

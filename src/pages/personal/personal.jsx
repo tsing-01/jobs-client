@@ -38,7 +38,8 @@ class Personal extends Component {
     }
 
     render() {
-        const { username, info, header, company, post, salary } = this.props.user
+        const { username, info, header, company, position, salary } = this.props.user;
+        console.log(this.props.user)
         return (
             <div style={{ marginBottom: 50, marginTop: 50, padding: '0 10px' }}>
                 <Result
@@ -48,7 +49,7 @@ class Personal extends Component {
                 />
                 <List renderHeader={() => 'relative info'} >
                     <Item multipleLine>
-                        <Brief>Position: {post}</Brief>
+                        <Brief>Position: {position}</Brief>
                         <Brief>Description:{info}</Brief>
                         {salary ? <Brief>Salary: {salary}</Brief> : null}
                     </Item>
