@@ -1,12 +1,4 @@
-// default: ajax request module
-import axios from 'axios'
-
-import { config } from '../config/index.js';
-const BASE_URL = config[process.env.NODE_ENV].BASE_URL;
-const server = axios.create({
-    baseURL: BASE_URL,
-    timeout: 10000,
-});
+import instance from "./instance";
 
 export default function ajax(url, data = {}, type = "GET") {
     if (type.toUpperCase() === "GET") {
@@ -19,9 +11,9 @@ export default function ajax(url, data = {}, type = "GET") {
             paramStr = paramStr.substring(0, paramStr.length - 1);
         }
         // axisos get request
-        return server.get(url + '?' + paramStr)
+        return instance.get(url + '?' + paramStr)
     } else {
         // axisos post request
-        return server.post(url, data);
+        return instance.post(url, data);
     }
 }

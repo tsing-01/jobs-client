@@ -25,6 +25,8 @@ import io from 'socket.io-client';
 import { config } from '../config';
 import { justifyJupmer } from '../utils/userTool';
 const SOCKET_URL = config[process.env.NODE_ENV].SOCKET_URL;
+// online for test
+// const SOCKET_URL = config.production.SOCKET_URL;
 
 function initIO(dispatch, userid) {
   // Before creating the object: Check if the object already exists, only create it if it doesn't (singleton)
@@ -45,8 +47,7 @@ function initIO(dispatch, userid) {
 // Asynchronously get message list data
 async function getMsgList(dispatch, userid) {
   initIO(dispatch, userid);
-  const response = await reqChatMsgList();
-  const result = response.data;
+  const result = await reqChatMsgList();
   if (result.code === 0) {
     const {
       users,
@@ -85,8 +86,7 @@ export const sendMsg = ({
 // Asynchronous action to read a message
 export const readMsg = (from, to) => {
   return async (dispatch) => {
-    const response = await reqReadMsg(from);
-    const result = response.data;
+    const result = await reqReadMsg(from);
     if (result.code === 0) {
       const count = result.data;
       // Dispatch a synchronous action
@@ -176,13 +176,12 @@ export const register = (user, jumper) => {
 
   return async (dispatch) => {
     // Send an asynchronous AJAX request for registration
-    const response = await reqRegister(user);
-    const result = response.data;
+    const result = await reqRegister(user);
 
     if (result.code === 0) {
       // Registration successful
       // After successful registration, get user chat data
-      // getMsgList(dispatch, result.data._id);
+      getMsgList(dispatch, result.data._id);
       // Dispatch a successful synchronous action, i.e., the authSuccess synchronous action
       console.log(result.data)
       dispatch(authSuccess(result.data));
@@ -209,14 +208,13 @@ export const login = (user, jumper) => {
   }
 
   return async (dispatch) => {
-    const response = await reqLogin(user);
-    const result = response.data;
+    const result = await reqLogin(user);
     if (result.code === 0) {
 
       console.log('Login successful', result.data);
       // Login successful
       // After successful login, get user chat data
-      // getMsgList(dispatch, result.data._id);
+      getMsgList(dispatch, result.data._id);
       // Dispatch a successful synchronous action, i.e., the authSuccess synchronous action
       dispatch(authSuccess(result.data));
       // jumper page
@@ -234,8 +232,7 @@ export const login = (user, jumper) => {
 export const updateUser = (user) => {
   console.log('updateUser', user);
   return async (dispatch) => {
-    const response = await reqUpdateUser(user);
-    const result = response.data;
+    const result = await reqUpdateUser(user);
     if (result.code === 0) {
       // Update successful
       // Dispatch a synchronous action
@@ -251,8 +248,7 @@ export const updateUser = (user) => {
 export const getUser = () => {
   return async (dispatch) => {
     // Execute an asynchronous AJAX request
-    const response = await reqUser();
-    const result = response.data;
+    const result = await reqUser();
     if (result.code === 0) {
       // Successful
       // Get user chat data
@@ -269,8 +265,7 @@ export const getUser = () => {
 export const getUserList = (type) => {
   return async (dispatch) => {
     // Execute an asynchronous AJAX request
-    const response = await reqUserList(type);
-    const result = response.data;
+    const result = await reqUserList(type);
     if (result.code === 0) {
       dispatch(receiveUserList(result.data));
     }

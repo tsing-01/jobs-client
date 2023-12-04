@@ -13,7 +13,7 @@ import {
     MSG_READ
 } from './action-types'
 
-import { Toast } from 'antd-mobile'
+import Cookies from 'js-cookie'
 
 
 
@@ -27,15 +27,16 @@ const initUser = {
 function user(state = initUser, action) {
     switch (action.type) {
         case AUTH_SUCCESS:
+            Cookies.set('userid', action.data._id, { expires: 7 })
             return {
                 ...action.data
             }
         case ERROR_MSG:
-            Toast.info(action.data, 2)
             return {
                 ...state, msg: action.data
             }
         case RECEIVE_USER:
+            Cookies.set('userid', action.data._id, { expires: 7 })
             return action.data
         case RESET_USER:
             return {
