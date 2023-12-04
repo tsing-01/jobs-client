@@ -10,7 +10,6 @@ import {
     Button
 } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 
 
 
@@ -27,8 +26,7 @@ class Register extends Component {
         type: 'employer',// employer or applicant
     }
     register = () => {
-        this.props.register(this.state);
-
+        this.props.register(this.state, this.props.history.replace);
     }
     handleChange = (name, val) => {
         this.setState({
@@ -37,16 +35,10 @@ class Register extends Component {
     }
     toLogin = () => {
         this.props.history.replace('/login')
-
     }
 
     render() {
         const { type } = this.state
-        const { msg, redirectTo } = this.props.user
-
-        if (redirectTo) {
-            return <Redirect to={redirectTo} />
-        }
 
 
         return (
@@ -55,9 +47,7 @@ class Register extends Component {
                 <Logo />
                 <WingBlank style={{marginTop: '-20px'}}>
                     <List>
-                        {msg ? <div className='error-msg' style={{paddingTop: '10px'}}>{msg}</div> : null} {/* Display error message here */}
-                        <WhiteSpace />
-                        {/* Top and bottom margin */}
+                        <WhiteSpace/>
                         <InputItem placeholder='Enter your username' onChange={val => { this.handleChange('username', val) }}>Username:</InputItem>
                         <WhiteSpace />
                         <InputItem placeholder='Enter your password' type="password" onChange={val => { this.handleChange('password', val) }}>Password:</InputItem>

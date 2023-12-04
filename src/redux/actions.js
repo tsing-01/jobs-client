@@ -23,6 +23,7 @@ import {
 // Import the client-side IO
 import io from 'socket.io-client';
 import { config } from '../config';
+import { justifyJupmer } from '../utils/userTool';
 const SOCKET_URL = config[process.env.NODE_ENV].SOCKET_URL;
 
 function initIO(dispatch, userid) {
@@ -160,7 +161,7 @@ const msgRead = ({
 });
 
 // Asynchronous action for user registration
-export const register = (user) => {
+export const register = (user, jumper) => {
   const {
     username,
     password,
@@ -181,10 +182,11 @@ export const register = (user) => {
     if (result.code === 0) {
       // Registration successful
       // After successful registration, get user chat data
-      getMsgList(dispatch, result.data._id);
+      // getMsgList(dispatch, result.data._id);
       // Dispatch a successful synchronous action, i.e., the authSuccess synchronous action
-      
+      console.log(result.data)
       dispatch(authSuccess(result.data));
+      jumper(justifyJupmer(result.data));
     } else {
       // Registration failed
       // Dispatch a failed synchronous action, i.e., the errorMsg synchronous action
@@ -194,7 +196,7 @@ export const register = (user) => {
 };
 
 // Asynchronous action for user login
-export const login = (user) => {
+export const login = (user, jumper) => {
   const {
     username,
     password
@@ -214,9 +216,12 @@ export const login = (user) => {
       console.log('Login successful', result.data);
       // Login successful
       // After successful login, get user chat data
-      getMsgList(dispatch, result.data._id);
+      // getMsgList(dispatch, result.data._id);
       // Dispatch a successful synchronous action, i.e., the authSuccess synchronous action
       dispatch(authSuccess(result.data));
+      // jumper page
+      jumper(justifyJupmer(result.data));
+      
     } else {
       // Login failed
       // Dispatch a failed synchronous action, i.e., the errorMsg synchronous action

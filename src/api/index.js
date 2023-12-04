@@ -3,7 +3,7 @@
 import ajax from './ajax'
 
 // register interface
-export const reqRegister=(user)=>ajax('/register',user,'POST') // it can be transfer to http://localhost:4000 in package.json
+export const reqRegister=(user)=>ajax('/register',user,'POST') 
 // login interface
 export const reqLogin=({username,password})=>ajax('/login',{username,password},'POST')
 // update user interface

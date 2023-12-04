@@ -8,6 +8,7 @@ import UserList from '../../components/user-list/user-list'
 class Employer extends Component {
     componentDidMount() {
         // get userList
+        console.log("applicant")
         this.props.getUserList('applicant')
     }
     render() {

@@ -22,6 +22,7 @@ class Personal extends Component {
                     Cookies.remove('userid')
                     // delete redux user
                     this.props.resetUser()
+                    this.props.history.replace('/login')
                     // jump to login
                     // rerender main page.
                 }

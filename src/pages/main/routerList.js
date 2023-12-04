@@ -1,4 +1,4 @@
-import Employer from '../applicant/applicant'
+import Employer from '../employer/employer'
 import Applicant from '../applicant/applicant'
 import Message from '../message/message'
 import Personal from '../personal/personal'
