@@ -9,7 +9,6 @@
   "homepage": "",
   "scripts": {
     "start": "react-app-rewired start",
-    "dev": "npx http-server ./build -p 3000",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-app-rewired eject",
