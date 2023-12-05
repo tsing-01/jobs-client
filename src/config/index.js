@@ -6,6 +6,6 @@ export const config = {
   production: {
     // online server address
     BASE_URL: 'https://jobs-server-jobs-server-online.up.railway.app',
-    SOCKET_URL: 'ws://jobs-server-jobs-server-online.up.railway.app'
+    SOCKET_URL: 'ws://https://jobs-server-jobs-server-online.up.railway.app'
   }
 }
