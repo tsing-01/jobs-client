@@ -6,7 +6,10 @@
   },
   "description": "jobs application server",
   "email": "yshaots@bu.edu",
-  "homepage": "",
+  "engines": {
+    "node": "16.14.0"
+  },
+  "homepage": "https://jobs-client-jobs-server-online.up.railway.app",
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",

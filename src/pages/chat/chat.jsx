@@ -16,6 +16,16 @@ class Chat extends Component {
     // first time render
     componentWillMount() {
         this.emojis = emojiList.map(emoji => ({ text: emoji }))
+        const { users } = this.props.chat
+
+        // get target header icon
+        const targetId = this.props.match.params.userid
+        const targetHeader = users[targetId].header
+        const targetIcon = targetHeader && require(`../../assets/images/${targetHeader}.png`);
+        this.setState({
+            targetIcon,
+            targetId
+        })
     }
     componentDidMount() {
         window.scrollTo(0, document.body.scrollHeight)
@@ -61,21 +71,19 @@ class Chat extends Component {
 
     render() {
         const { user } = this.props
-        const { users, chatMsgs } = this.props.chat
-
-        // calculate chatId
+        const {users, chatMsgs} = this.props.chat
+        const { targetIcon, content, isShow, targetId } = this.state;
         const meId = user._id
-        const targetId = this.props.match.params.userid
-        const chatId = [meId, targetId].sort().join('_')
-
         if (!users[meId]) { // not show until users have been loaded
             return null
         }
-        // filter the chatMsgs
-        const msgs = chatMsgs.filter(msg => msg.chat_id === chatId)
-        // get target header icon
-        const targetHeader = users[targetId].header
-        const targetIcon = targetHeader ? require(`../../assets/images/${targetHeader}.png`) : null
+        
+         // calculate chatId
+         
+         const chatId = [meId, targetId].sort().join('_')
+ 
+         // filter the chatMsgs
+         const msgs = chatMsgs.filter(msg => msg.chat_id === chatId)
 
         return (
             <div id='chat-page'>
@@ -113,7 +121,7 @@ class Chat extends Component {
                 <div className='am-tab-bar'>
                     <InputItem
                         placeholder='Please input'
-                        value={this.state.content}
+                        value={content}
                         onChange={val => this.setState({ content: val })}
                         onFocus={() => this.setState({ isShow: false })}
                         extra={
@@ -123,7 +131,7 @@ class Chat extends Component {
                             </span>
                         }
                     />
-                    {this.state.isShow ?
+                    {isShow ?
                         <Grid
                             data={this.emojis}
                             columnNum={8}
@@ -131,7 +139,7 @@ class Chat extends Component {
                             isCarousel={true}
                             onClick={(item) => {
                                 this.setState({
-                                    content: this.state.content + item.text
+                                    content: content + item.text
                                 })
                             }}
                         />

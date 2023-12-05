@@ -21,27 +21,33 @@ class Main extends Component {
     componentDidMount() {
         // login in the past, but redux user does not have _id. (This is similar to refreshing the page. All the data in redux is empty)
         const { _id } = this.props.user
+        const {navList, user} = this.props
         if (this.state.userid && !_id) {
             //  send ajax request to get user
             this.props.getUser()
         }
-    }
 
-    render() {
-        const { unReadCount, subnavList, navList, user } = this.props
-        if (!user._id) {
-            return <Redirect to='/login' />
-        }
-            
         const newNavList = navList.filter(elem => {
             const status = user.type === 'employer' ? '/applicant' : '/employer';
             return elem.path !== status
         })
-        console.log(newNavList)
+        
+
+        this.setState({ newNavList })
+    }
+
+    render() {
+        const { unReadCount, subnavList, user } = this.props
+        const {newNavList } = this.state
+        if (!user._id) {
+            return <Redirect to='/login' />
+        }
+            
         const path = this.props.location.pathname
         const allNavList = [...newNavList, ...subnavList]
         const currentNav = allNavList.find(nav => nav.path === path)
         const isChat = path.indexOf('/chat') >= 0
+
         // return not found page if currentNav is not exist
         if (!currentNav && !isChat) {
             return <NotFound />
