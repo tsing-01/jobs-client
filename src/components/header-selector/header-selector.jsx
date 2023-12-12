@@ -44,7 +44,8 @@ export default class HeaderSelector extends Component {
         return (
             <List renderHeader={() => listHeader}>
                 <Grid data={this.headerList}
-                    columnNum={5}
+                    square={false}
+                    columnNum={6}
                     onClick={this.handleClick}
                 />
             </List>
